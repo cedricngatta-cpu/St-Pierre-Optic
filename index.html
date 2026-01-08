@@ -3,53 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="St Pierre Optique à Bonoua : examens de la vue, large choix de montures optiques et solaires. Expert en santé visuelle face au Centre Technique.">
     <title>St Pierre Optique - Votre expert vue</title>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="bootstrap-5.1.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
+<body>
     <header id="main-header">
         <nav>
             <a href="index.html" class="logo">ST PIERRE OPTIQUE</a>
+            
+            <input type="checkbox" id="menu-toggle" class="nav-checkbox">
+            <label for="menu-toggle" class="burger">
+                <span></span><span></span><span></span>
+            </label>
             <ul id="nav-links">
                 <li><a href="#hero">Accueil</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#collections">Collections</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><button class="btn-rdv open-modal">Prendre RDV</button></li>
+                <li><a href="#rdv-modal" class="btn-rdv">Prendre RDV</a></li>
             </ul>
-            <div class="burger" id="burger">
-                <span></span><span></span><span></span>
-            </div>
         </nav>
     </header>
 
     <section id="hero">
-        <div class="hero-content" data-aos="fade-up">
+        <div class="hero-content">
             <h1>La clarté, le style, <br><span>l'expertise en plus.</span></h1>
-            <p>Découvrez une expérience optique personnalisée à [Ville].</p>
-            <button class="btn-main open-modal">Réserver un créneau</button>
+            <p>Découvrez une expérience optique personnalisée à Bonoua.</p>
+            <a href="#rdv-modal" class="btn-main">Réserver un créneau</a>
         </div>
     </section>
 
     <section id="services">
-        <h2 data-aos="fade-down">Nos Services</h2>
+        <h2>Nos Services</h2>
         <div class="services-grid">
-            <div class="service-card" data-aos="zoom-in" data-aos-delay="100">
+            <div class="service-card">
                 <i class="fas fa-eye fa-2x"></i>
                 <h3>Examen de la vue</h3>
                 <p>Contrôle précis réalisé par nos opticiens diplômés.</p>
             </div>
-            <div class="service-card" data-aos="zoom-in" data-aos-delay="200">
+            <div class="service-card">
                 <i class="fas fa-file-invoice-dollar fa-2x"></i>
                 <h3>Tiers Payant</h3>
                 <p>Nous gérons vos remboursements avec toutes les mutuelles.</p>
             </div>
-            <div class="service-card" data-aos="zoom-in" data-aos-delay="300">
+            <div class="service-card">
                 <i class="fas fa-tools fa-2x"></i>
                 <h3>Atelier Réparation</h3>
                 <p>Ajustage et entretien gratuit de vos montures à vie.</p>
@@ -58,55 +58,31 @@
     </section>
 
     <section id="collections">
-        <h2 data-aos="fade-up">Nos Collections</h2>
+        <h2>Nos Collections</h2>
         <div class="gallery-grid">
-            <div class="gallery-item" data-aos="flip-left">
-                <img src="image/Optique Femme.jfif" alt="Femme">
+            <div class="gallery-item">
+                <img src="image/Optique Femme.jfif" alt="Monture de lunettes tendance pour femme" loading="lazy">
                 <div class="overlay"><span>Optique Femme</span></div>
             </div>
-            <div class="gallery-item" data-aos="flip-left" data-aos-delay="100">
-                <img src="image/Solaires Tendance.jpg" alt="Solaire">
+            <div class="gallery-item">
+                <img src="image/Solaires Tendance.jpg" alt="Lunettes de Soleil tendance pour femme" loading="lazy">
                 <div class="overlay"><span>Solaires Tendance</span></div>
             </div>
-            <div class="gallery-item" data-aos="flip-left" data-aos-delay="200">
-                <img src="image/Style Homme.jfif" alt="Homme">
+            <div class="gallery-item">
+                <img src="image/Style Homme.jfif" alt="Monture de lunettes tendance pour homme" loading="lazy">
                 <div class="overlay"><span>Style Homme</span></div>
             </div>
-             <div class="gallery-item" data-aos="flip-left" data-aos-delay="200">
-                <img src="image/Style Enfant.jfif" alt="Homme">
+            <div class="gallery-item">
+                <img src="image/Style Enfant.jfif" alt="Monture de lunettes  pour enfant" loading="lazy">
                 <div class="overlay"><span>Style Enfant</span></div>
             </div>
-            <div class="gallery-item" data-aos="flip-left" data-aos-delay="200">
-                <img src="image/Style Enfant.jfif" alt="Homme">
+            <div class="gallery-item">
+                <img src="image/Style Enfant.jfif" alt="Monture de lunettes  pour enfant" loading="lazy">
                 <div class="overlay"><span>Style Enfant</span></div>
             </div>
-            <div class="gallery-item" data-aos="flip-left" data-aos-delay="200">
-                <img src="image/Style Enfant.jfif" alt="Homme">
+            <div class="gallery-item">
+                <img src="image/Style Enfant.jfif" alt="Monture de lunettes  pour enfant" loading="lazy">
                 <div class="overlay"><span>Style Enfant</span></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2 data-aos="fade-up">Nous Trouver</h2>
-        <div class="contact-container">
-            <div class="contact-info" data-aos="fade-right">
-                <h3>St Pierre Optique</h3>
-                <p><i class="fas fa-map-marker-alt"></i> En face du Centre Technique, Bonoua</p>
-                <p><i class="fas fa-phone"></i> 01 02 03 04 05</p>
-                <p><i class="fas fa-envelope"></i> contact@stpierre-optique.fr</p>
-                <div class="horaires">
-                    <h4><i class="fas fa-clock"></i> Horaires</h4>
-                    <p>Lundi - Vendredi : 09h00 - 19h00</p>
-                    <p>Samedi : 09h00 - 18h00</p>
-                    <p>Dimanche : Fermé</p>
-                </div>
-            </div>
-            <div class="contact-map" data-aos="fade-left">
-                <div class="map-placeholder">
-                    <i class="fas fa-map-marked-alt fa-3x"></i>
-                    <p>Carte interactive prochainement</p>
-                </div>
             </div>
         </div>
     </section>
@@ -114,10 +90,10 @@
     <div class="modal" id="rdv-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Prendre Rendez-vous</h2>
-                <span class="close-modal">&times;</span>
+                <h5><i class="far fa-calendar-alt"></i> Prendre RDV</h5>
+                <a href="#" class="close-modal">&times;</a>
             </div>
-            <form id="rdv-form">
+            <form id="rdv-form" action="#">
                 <div class="input-group">
                     <label>Motif de visite</label>
                     <select required>
@@ -130,7 +106,7 @@
                 <div class="form-row">
                     <div class="input-group">
                         <label>Date</label>
-                        <input type="date" id="date-select" required>
+                        <input type="date" required>
                     </div>
                     <div class="input-group">
                         <label>Heure</label>
@@ -146,12 +122,44 @@
             </form>
         </div>
     </div>
-
+        <section id="contact">
+        <h2>Nous Trouver</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>St Pierre Optique</h3>
+                <p><i class="fas fa-map-marker-alt"></i> En face du Centre Technique, Bonoua</p>
+                <p><i class="fas fa-phone"></i> 01 02 03 04 05</p>
+                <p><i class="fas fa-envelope"></i> contact@stpierre-optique.fr</p>
+                
+                <div class="horaires">
+                    <h4><i class="fas fa-clock"></i> Horaires</h4>
+                    <ul>
+                        <li><span>Lundi - Vendredi :</span> 09h00 - 19h00</li>
+                        <li><span>Samedi :</span> 09h00 - 18h00</li>
+                        <li><span>Dimanche :</span> Fermé</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="contact-map">
+               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15891.664560842162!2d-3.604066332354121!3d5.27577019586775!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfc21a746fdb212f%3A0x5640a9bfb6dcd6c7!2sCentre%20Technique%20de%20Bonoua!5e0!3m2!1sfr!2sci!4v1767890988298!5m2!1sfr!2sci" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+    <section id="avis">
+    <h2>Ce que disent nos clients</h2>
+    <div class="avis-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+        <div class="avis-card" style="padding: 20px; background: #f9f9f9; border-radius: 10px;">
+            <p>"Équipe très professionnelle et large choix de montures à Bonoua !"</p>
+            <strong>- Jean M.</strong>
+        </div>
+        <div class="avis-card" style="padding: 20px; background: #f9f9f9; border-radius: 10px;">
+            <p>"Le service de réparation est rapide et efficace. Je recommande."</p>
+            <strong>- Marie K.</strong>
+        </div>
+    </div>
+</section>
     <footer>
         <p>&copy; 2024 ST PIERRE OPTIQUE - Tous droits réservés.</p>
     </footer>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>

@@ -1,12 +1,7 @@
 /* ==========================================================================
-   1. RESET & BASES
+   BASES & RESET
    ========================================================================== */
-* { 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-}
-
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body { 
     font-family: 'Poppins', sans-serif; 
     color: #333; 
@@ -15,308 +10,230 @@ body {
     overflow-x: hidden; 
 }
 
-img {
-    max-width: 100%;
-    display: block;
+/* ==========================================================================
+   ANIMATIONS AU SCROLL (SANS JS)
+   ========================================================================== */
+@keyframes revealUp {
+    from { opacity: 0; transform: translateY(60px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes zoomReveal {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Application des animations au scroll */
+.service-card, .gallery-item, .hero-content, #services h2, #collections h2 {
+    view-timeline-name: --revealing;
+    view-timeline-axis: block;
+    animation: revealUp linear both;
+    animation-timeline: --revealing;
+    animation-range: entry 10% cover 40%;
 }
 
 /* ==========================================================================
-   2. NAVIGATION (HEADER)
+   NAVIGATION & BURGER CSS
    ========================================================================== */
 header { 
     background: #fff; 
     padding: 20px 5%; 
-    position: sticky; 
-    top: 0; 
-    z-index: 1000; 
-    transition: all 0.4s ease; 
+    position: sticky; top: 0; z-index: 1000; 
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
-header.scrolled { 
-    padding: 10px 5%; 
-    box-shadow: 0 2px 15px rgba(0,0,0,0.1); 
-}
+nav { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: bold; color: #1a2a6c; text-decoration: none; }
 
-nav { 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-}
+.nav-checkbox { display: none; }
+#nav-links { display: flex; list-style: none; align-items: center; }
+#nav-links li { margin-left: 25px; }
+#nav-links a { text-decoration: none; color: #333; font-weight: 500; transition: 0.3s; }
+#nav-links a:hover { color: #5ec75a; }
 
-.logo { 
-    font-family: 'Playfair Display', serif; 
-    font-size: 1.5rem; 
-    font-weight: bold; 
-    color: #1a2a6c; 
-    text-decoration: none; 
-}
+/* Styles du Burger */
+.burger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+.burger span { width: 25px; height: 3px; background: #1a2a6c; transition: 0.3s; border-radius: 5px; }
 
-nav ul { 
-    display: flex; 
-    list-style: none; 
-    align-items: center; 
-}
-
-nav ul li { margin-left: 25px; }
-
-nav ul li a { 
-    text-decoration: none; 
-    color: #333; 
-    font-weight: 500;
-    transition: 0.3s; 
-}
-
-nav ul li a:hover { color: #5ec75a; }
-
-.btn-rdv { 
-    background: #1a2a6c; 
-    color: #fff !important; 
-    padding: 10px 22px; 
-    border-radius: 8px; 
-    border: none; 
-    cursor: pointer; 
-    font-family: inherit; 
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-rdv:hover {
-    background: #5ec75a;
-    color: #1a2a6c !important;
-    transform: translateY(-2px);
+/* Responsive Burger Logic */
+@media (max-width: 768px) {
+    .burger { display: flex; }
+    #nav-links {
+        position: fixed; top: 80px; left: -100%; width: 100%; height: 100vh;
+        background: #fff; flex-direction: column; padding-top: 50px; transition: 0.5s;
+    }
+    #menu-toggle:checked ~ #nav-links { left: 0; }
+    #menu-toggle:checked + .burger span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+    #menu-toggle:checked + .burger span:nth-child(2) { opacity: 0; }
+    #menu-toggle:checked + .burger span:nth-child(3) { transform: rotate(-45deg) translate(5px, -7px); }
 }
 
 /* ==========================================================================
-   3. SECTION HERO (IMAGE ANIMÉE)
+   HERO SECTION
    ========================================================================== */
 #hero { 
-    height: 85vh; 
-    position: relative; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    color: white; 
-    text-align: center; 
-    overflow: hidden; 
-    background-color: #000;
+    height: 85vh; display: flex; align-items: center; justify-content: center; 
+    color: white; text-align: center; position: relative; overflow: hidden;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('image/banniere.jfif') no-repeat center/cover;
 }
 
-#hero::before {
-    content: "";
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
-                url('image/banniere.jfif') no-repeat center/cover;
-    z-index: 0;
-    animation: heroIntro 8s ease-out forwards;
-    will-change: transform;
-}
-
-@keyframes heroIntro {
-    from { transform: scale(1.2); }
-    to { transform: scale(1); }
-}
-
-.hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 800px;
-    padding: 0 20px;
-}
-
-h1 { 
-    font-family: 'Playfair Display', serif; 
-    font-size: clamp(2.5rem, 6vw, 4rem); 
-    line-height: 1.2;
-    margin-bottom: 20px;
-}
-
-h1 span { color: #5ec75a; }
-
+.hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 15px; }
+.hero-content h1 span { color: #5ec75a; }
 .btn-main { 
-    display: inline-block;
-    background: #fff; 
-    color: #1a2a6c; 
-    padding: 15px 40px; 
-    border-radius: 8px; 
-    font-weight: bold; 
-    text-decoration: none;
-    border: none; 
-    cursor: pointer; 
-    transition: all 0.3s ease; 
-    margin-top: 25px; 
+    display: inline-block; margin-top: 20px; padding: 15px 35px; 
+    background: #fff; color: #1a2a6c; text-decoration: none; border-radius: 8px; font-weight: bold; transition: 0.3s;
 }
-
-.btn-main:hover { 
-    background: #5ec75a; 
-    transform: scale(1.05);
-}
+.btn-main:hover { background: #5ec75a; transform: translateY(-3px); }
 
 /* ==========================================================================
-   4. SECTIONS COMMUNES & GRILLES (AVEC EFFET OVERLAY)
+   SERVICES & GRILLES
    ========================================================================== */
-#services, #collections, #contact { padding: 100px 5%; text-align: center; }
-
-h2 { 
-    font-family: 'Playfair Display', serif; 
-    font-size: 2.5rem; 
-    margin-bottom: 50px; 
-    color: #1a2a6c; 
-    position: relative;
-    padding-bottom: 15px;
-}
-
-h2::after {
-    content: "";
-    position: absolute;
-    bottom: 0; left: 50%; transform: translateX(-50%);
-    width: 60px; height: 3px; background: #5ec75a;
-}
+section { padding: 80px 5%; text-align: center; }
+h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px; color: #1a2a6c; }
 
 .services-grid, .gallery-grid { 
-    display: grid; 
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-    gap: 30px; 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; 
 }
 
-.service-card { 
-    padding: 45px 30px; 
-    border: 1px solid #f0f0f0; 
-    border-radius: 15px; 
-    background: #fff;
-    transition: all 0.4s ease; 
-}
+.service-card { padding: 40px; border-radius: 15px; border: 1px solid #eee; transition: 0.3s; }
+.service-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+.service-card i { color: #5ec75a; margin-bottom: 15px; }
 
-.service-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
-
-/* --- Galerie Photo avec Overlay --- */
-.gallery-item { 
-    position: relative; 
-    overflow: hidden; 
-    border-radius: 12px; 
-    height: 400px; 
-    cursor: pointer;
-}
-
-.gallery-item img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); 
-}
-
-.gallery-item .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(26, 42, 108, 0.85); /* Bleu marine avec opacité */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: all 0.4s ease;
-}
-
-.gallery-item .overlay span {
-    color: #fff;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    border: 2px solid #5ec75a;
-    padding: 12px 25px;
-    transform: translateY(30px);
-    transition: all 0.4s ease;
-}
-
-/* Effets Hover Galerie */
+/* Galerie */
+.gallery-item { position: relative; height: 350px; border-radius: 15px; overflow: hidden; }
+.gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
 .gallery-item:hover img { transform: scale(1.1); }
+.overlay { 
+    position: absolute; inset: 0; background: rgba(26, 42, 108, 0.8); 
+    display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; 
+}
 .gallery-item:hover .overlay { opacity: 1; }
-.gallery-item:hover .overlay span { transform: translateY(0); }
+.overlay span { color: white; border: 2px solid #5ec75a; padding: 10px 20px; font-weight: bold; }
 
 /* ==========================================================================
-   5. MODALE & FORMULAIRE DE RDV
+   MODALE CSS (:target)
    ========================================================================== */
 .modal { 
-    display: none; 
-    position: fixed; 
-    z-index: 2000; 
-    left: 0; top: 0; width: 100%; height: 100%; 
-    background: rgba(10, 20, 50, 0.85); 
-    backdrop-filter: blur(6px); 
-    align-items: center; 
-    justify-content: center; 
+    position: fixed; inset: 0; background: rgba(0,0,0,0.8); 
+    display: none; align-items: center; justify-content: center; z-index: 2000;
 }
+.modal:target { display: flex; } /* Affiche la modale quand l'URL finit par #rdv-modal */
 
-.modal-content { 
-    background: #fff; 
-    border-radius: 20px; 
-    width: 95%; 
-    max-width: 500px; 
-    overflow: hidden; 
-    animation: modalAppear 0.4s ease-out;
-}
+.modal-content { background: #fff; width: 90%; max-width: 500px; border-radius: 15px; overflow: hidden; position: relative; }
+.modal-header { background: #1a2a6c; color: #fff; padding: 20px; text-align: center; }
+.close-modal { position: absolute; right: 20px; top: 15px; font-size: 30px; color: #fff; text-decoration: none; }
 
-@keyframes modalAppear {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
-}
+#rdv-form { padding: 30px; }
+.input-group { margin-bottom: 15px; text-align: left; }
+.input-group label { display: block; font-weight: 600; margin-bottom: 5px; }
+.input-group input, .input-group select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+.btn-rdv-submit { width: 100%; padding: 15px; background: #1a2a6c; color: #fff; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
-.modal-header { 
-    background: #1a2a6c; 
-    color: white; 
-    padding: 30px; 
-    position: relative; 
-    text-align: center; 
-}
-
-.close-modal { 
-    position: absolute; 
-    right: 20px; top: 20px; 
-    font-size: 30px; 
-    cursor: pointer; 
-    color: white;
-}
-
-#rdv-form { padding: 40px; }
-.input-group { margin-bottom: 20px; text-align: left; }
-.input-group label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.9rem; color: #1a2a6c; }
-.input-group input, .input-group select { width: 100%; padding: 14px; border: 2px solid #eee; border-radius: 10px; font-family: inherit; transition: 0.3s; }
-.input-group input:focus { border-color: #5ec75a; outline: none; }
-.form-row { display: flex; gap: 15px; }
-
-.btn-rdv-submit { 
-    width: 100%; padding: 16px; background: #1a2a6c; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s;
-}
-.btn-rdv-submit:hover { background: #5ec75a; color: #1a2a6c; }
-
+footer { background: #1a2a6c; color: #fff; padding: 40px; text-align: center; }
 /* ==========================================================================
-   6. CONTACT & FOOTER
+   SECTION CONTACT & MAP
    ========================================================================== */
 .contact-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 40px;
     margin-top: 40px;
+    text-align: left;
 }
 
-.contact-info { text-align: left; padding: 20px; }
-.contact-info i { color: #5ec75a; margin-right: 10px; width: 20px; }
-.horaires { margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee; }
+/* Animation au scroll pour le container contact */
+.contact-container {
+    view-timeline-name: --contact;
+    view-timeline-axis: block;
+    animation: revealUp linear both;
+    animation-timeline: --contact;
+    animation-range: entry 5% cover 30%;
+}
 
-.map-placeholder {
-    height: 100%;
-    min-height: 300px;
-    background: #f4f7f6;
-    border-radius: 15px;
+.contact-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #1a2a6c;
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    margin-bottom: 12px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
+}
+
+.contact-info i {
+    color: #5ec75a;
+    margin-right: 15px;
+    font-size: 1.1rem;
+    width: 20px;
+}
+
+/* Styles des Horaires */
+.horaires {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+
+.horaires h4 {
+    margin-bottom: 15px;
     color: #1a2a6c;
 }
 
-footer { background: #1a2a6c; color: white; padding: 60px 20px; text-align: center; }
+.horaires ul {
+    list-style: none;
+}
 
+.horaires li {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 0.95rem;
+}
+
+.horaires li span {
+    font-weight: 600;
+}
+
+/* Optimisation de la carte pour le mobile */
+.contact-map iframe {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+    }
+}
+/* Style exclusif pour le bouton Prendre RDV dans la navigation */
+#nav-links li a.btn-rdv {
+    background-color: #1a2a6c !important; /* Force la couleur bleu marine */
+    color: #ffffff !important;           /* Force le texte en blanc */
+    padding: 10px 22px !important;       /* Donne du volume au bouton */
+    border-radius: 50px !important;      /* Forme arrondie type bouton */
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    display: inline-flex;                /* Aligne l'icône et le texte */
+    align-items: center;
+    gap: 8px;                            /* Espace entre l'icône et le texte */
+    transition: all 0.3s ease !important;
+    border: 2px solid #1a2a6c !important;
+    box-shadow: 0 4px 10px rgba(26, 42, 108, 0.2);
+}
+
+/* État au survol (uniquement pour ce bouton) */
+#nav-links li a.btn-rdv:hover {
+    background-color: #5ec75a !important; /* Devient vert au survol */
+    border-color: #5ec75a !important;
+    color: #1a2a6c !important;           /* Le texte passe en bleu pour rester lisible */
+    transform: translateY(-2px);         /* Petit effet de levier */
+    box-shadow: 0 6px 15px rgba(94, 199, 90, 0.3);
+}
+
+/* Suppression de la barre sous le lien au survol (si vous en aviez une) */
+#nav-links li a.btn-rdv::after {
+    display: none !important;
+}
